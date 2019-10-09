@@ -1992,7 +1992,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return _this.$router.push("/user/login");
       });
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("login", ["logout"]))
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("login", ["logout"])),
+  watch: {
+    // prettier-ignore
+    "$route": function $route() {
+      $(".navbar-collapse").collapse("hide");
+    }
+  }
 });
 
 /***/ }),

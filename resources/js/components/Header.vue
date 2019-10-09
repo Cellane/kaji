@@ -77,6 +77,13 @@ export default {
     },
 
     ...mapActions("login", ["logout"])
+  },
+
+  watch: {
+    // prettier-ignore
+    "$route"() {
+      $(".navbar-collapse").collapse("hide")
+    }
   }
 }
 </script>
