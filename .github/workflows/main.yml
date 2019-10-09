@@ -1,6 +1,9 @@
 name: Test and deploy
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -14,6 +17,9 @@ jobs:
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Install Passport
+        run: php artisan passport:install
 
       - name: Run test suite
         run: composer run-script test
