@@ -18,6 +18,24 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
+      - name: Copy .env file
+        run: cp .env.ci .env
+
+      - name: Generate the application key
+        run: php artisan key:generate
+
+      - name: Create a cache file
+        run: php artisan config:cache
+
+      - name: Create a route cache file
+        run: php artisan route:cache
+
+      - name: Migrate database
+        run: php artisan migrate
+
+      - name: Install Laravel Passport
+        run: php artisan passport:install
+
       - name: Run test suite
         run: composer run-script test
 
