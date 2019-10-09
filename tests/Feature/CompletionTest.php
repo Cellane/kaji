@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Task;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
 
 class CompletionTest extends TestCase
 {
@@ -14,9 +13,9 @@ class CompletionTest extends TestCase
     /** @test */
     public function authenticated_user_can_complete_a_scheduled_task()
     {
-        $task = factory(Task::class)->create([
-            'schedule' => 1 << Carbon::now()->dayOfWeek
-        ]);
+        $task = factory(Task::class)
+            ->states('today')
+            ->create();
 
         $this->assertTrue($task->scheduledToday());
         $this->assertFalse($task->completedToday());
