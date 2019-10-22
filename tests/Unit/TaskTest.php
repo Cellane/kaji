@@ -32,7 +32,7 @@ class TaskTest extends TestCase
 
         $this->assertTrue($this->task->scheduledToday());
 
-        $this->task->schedule = $weekday->today() + $weekday->anotherDay();
+        $this->task->schedule = $weekday->anotherDay();
 
         $this->assertFalse($this->task->scheduledToday());
     }
