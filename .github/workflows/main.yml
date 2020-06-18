@@ -40,11 +40,14 @@ jobs:
       - name: Run test suite
         run: composer run-script test
 
+      - name: Extract branch name
+        run: |
+          echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+
       - name: Deploy to Dokku
-        if: github.ref == 'master'
-        uses: vitalyliber/dokku-github-action@b171919
+        if: env.BRANCH_NAME == 'master'
+        uses: vitalyliber/dokku-github-action@57b7fd8
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
           HOST: milanvit.net
           PROJECT: kaji
