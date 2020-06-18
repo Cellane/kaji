@@ -1,9 +1,7 @@
 name: Test and deploy
 
 on:
-  push:
-    branches:
-      - master
+  push
 
 jobs:
   build:
@@ -43,6 +41,7 @@ jobs:
         run: composer run-script test
 
       - name: Deploy to Dokku
+        if: github.ref == 'master'
         uses: vitalyliber/dokku-github-action@b171919
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
