@@ -49,5 +49,5 @@ jobs:
         uses: vitalyliber/dokku-github-action@57b7fd8
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          HOST: milanvit.net
+          HOST: ssh.milanvit.net
           PROJECT: kaji
