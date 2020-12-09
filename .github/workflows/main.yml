@@ -43,7 +43,7 @@ jobs:
         run: composer run-script test
 
       - name: Deploy to Dokku
-        if: github.ref, 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         uses: dokku/github-action@master
         with:
           git_remote_url: 'ssh://dokku@ssh.milanvit.net:22/kaji'
