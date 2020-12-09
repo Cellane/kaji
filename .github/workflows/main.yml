@@ -48,7 +48,7 @@ jobs:
 
       - name: Deploy to Dokku
         if: env.BRANCH_NAME == 'master'
-        uses: dokku/dokku@master
+        uses: dokku/github-action@master
         with:
           git_remote_url: 'ssh://dokku@ssh.milanvit.net:22/kaji'
           ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
