@@ -42,12 +42,8 @@ jobs:
       - name: Run test suite
         run: composer run-script test
 
-      - name: Extract branch name
-        run: |
-          echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
-
       - name: Deploy to Dokku
-        if: env.BRANCH_NAME == 'master'
+        if: github.ref, 'refs/heads/master'
         uses: dokku/github-action@master
         with:
           git_remote_url: 'ssh://dokku@ssh.milanvit.net:22/kaji'
