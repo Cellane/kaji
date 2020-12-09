@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Validate composer.json and composer.lock
         run: composer validate
@@ -46,8 +48,8 @@ jobs:
 
       - name: Deploy to Dokku
         if: env.BRANCH_NAME == 'master'
-        uses: vitalyliber/dokku-github-action@57b7fd8
-        env:
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          HOST: ssh.milanvit.net
-          PROJECT: kaji
+        uses: dokku/dokku@master
+        with:
+          git_remote_url: 'ssh://dokku@ssh.milanvit.net:22/kaji'
+          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
